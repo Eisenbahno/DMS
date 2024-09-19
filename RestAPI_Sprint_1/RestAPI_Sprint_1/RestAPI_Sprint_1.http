@@ -1,0 +1,6 @@
+@RestAPI_Sprint_1_HostAddress = http://localhost:5153
+
+GET {{RestAPI_Sprint_1_HostAddress}}/
+Accept: application/json
+
+###
