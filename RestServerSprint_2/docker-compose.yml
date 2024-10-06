@@ -1,0 +1,14 @@
+﻿services:
+  restserver:
+    build:
+      context: ./RestServerSprint_2
+    ports:
+      - "5000:5000"
+  
+  webserver:
+    build:
+      context: ./WebServer
+    ports:
+      - "80:80"
+    depends_on:
+      - restserver
