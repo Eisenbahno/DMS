@@ -1,6 +1,0 @@
-﻿services:
-  restapi_sprint_1:
-    image: restapi_sprint_1
-    build:
-      context: .
-      dockerfile: RestAPI_Sprint_1/Dockerfile
