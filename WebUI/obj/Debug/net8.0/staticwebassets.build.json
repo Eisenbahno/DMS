@@ -1,0 +1,77 @@
+{
+  "Version": 1,
+  "Hash": "7TpxxxFajCAj3/ScpFhufHxeP/hrzTh23jayMwUMZKY=",
+  "Source": "WebUI",
+  "BasePath": "_content/WebUI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "WebUI/wwwroot",
+      "Source": "WebUI",
+      "ContentRoot": "/Users/stefan/Documents/GitHub/DMS/WebUI/wwwroot/",
+      "BasePath": "_content/WebUI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/Users/stefan/Documents/GitHub/DMS/WebUI/wwwroot/app.js",
+      "SourceId": "WebUI",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/stefan/Documents/GitHub/DMS/WebUI/wwwroot/",
+      "BasePath": "_content/WebUI",
+      "RelativePath": "app.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/app.js"
+    },
+    {
+      "Identity": "/Users/stefan/Documents/GitHub/DMS/WebUI/wwwroot/index.html",
+      "SourceId": "WebUI",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/stefan/Documents/GitHub/DMS/WebUI/wwwroot/",
+      "BasePath": "_content/WebUI",
+      "RelativePath": "index.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/index.html"
+    },
+    {
+      "Identity": "/Users/stefan/Documents/GitHub/DMS/WebUI/wwwroot/styles.css",
+      "SourceId": "WebUI",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/stefan/Documents/GitHub/DMS/WebUI/wwwroot/",
+      "BasePath": "_content/WebUI",
+      "RelativePath": "styles.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/styles.css"
+    }
+  ]
+}

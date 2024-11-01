@@ -1,0 +1,114 @@
+name: dockercompose17964102102543376484
+services:
+  asp_rest_api:
+    build:
+      context: C:\Users\ivank\OneDrive\Desktop\FH\SwKom\DMS
+      dockerfile: ./ASP_Rest_API/Dockerfile
+    depends_on:
+      dal:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+    image: asp_rest_api_image
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "8080"
+        protocol: tcp
+  dal:
+    build:
+      context: C:\Users\ivank\OneDrive\Desktop\FH\SwKom\DMS
+      dockerfile: ./DAL/Dockerfile
+    depends_on:
+      db:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8081
+    image: dal_image
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8081
+        published: "8081"
+        protocol: tcp
+  db:
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    image: postgres
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 5432
+        published: "5432"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: postgres_data
+        target: /var/lib/postgresql/data
+        volume: {}
+  rabbitmq:
+    container_name: rabbitmq_dms
+    environment:
+      RABBITMQ_DEFAULT_PASS: password
+      RABBITMQ_DEFAULT_USER: user
+    image: rabbitmq:management
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 5672
+        published: "5672"
+        protocol: tcp
+      - mode: ingress
+        target: 15672
+        published: "15672"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\ivank\OneDrive\Desktop\FH\SwKom\DMS\rabbitmq.conf
+        target: /etc/rabbitmq/rabbitmq.conf
+        bind:
+          create_host_path: true
+  webui:
+    build:
+      context: C:\Users\ivank\OneDrive\Desktop\FH\SwKom\DMS\WebUI
+      dockerfile: Dockerfile
+    depends_on:
+      asp_rest_api:
+        condition: service_started
+        required: true
+    image: web_ui_image
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "80"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\ivank\OneDrive\Desktop\FH\SwKom\DMS\WebUI\nginx.conf
+        target: /etc/nginx/nginx.conf
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\ivank\OneDrive\Desktop\FH\SwKom\DMS\WebUI\wwwroot
+        target: /app/wwwroot
+        bind:
+          create_host_path: true
+networks:
+  default:
+    name: dockercompose17964102102543376484_default
+volumes:
+  postgres_data:
+    name: dockercompose17964102102543376484_postgres_data

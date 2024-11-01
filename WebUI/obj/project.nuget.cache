@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "VFPwxT2u7im37AVGCPb+D+2aDLiC+ANBbK69RjAin4sSTOya5bco2XmvTQMzblRW3WcBkqDJ7YVElWwznl1SQQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ivank\\OneDrive\\Desktop\\FH\\SwKom\\DMS\\WebUI\\WebUI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ivank\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.21.0\\microsoft.visualstudio.azure.containers.tools.targets.1.21.0.nupkg.sha512"
+  ],
+  "logs": []
+}

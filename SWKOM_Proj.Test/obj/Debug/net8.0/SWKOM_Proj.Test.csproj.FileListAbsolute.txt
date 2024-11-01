@@ -1,0 +1,6 @@
+C:\Users\ivank\OneDrive\Desktop\FH\SwKom\DMS_RABBIT\SWKOM_Proj.Test\bin\Debug\net8.0\CoverletSourceRootsMapping_SWKOM_Proj.Test
+C:\Users\ivank\OneDrive\Desktop\FH\SwKom\DMS_RABBIT\SWKOM_Proj.Test\obj\Debug\net8.0\SWKOM_Proj.Test.csproj.AssemblyReference.cache
+C:\Users\ivank\OneDrive\Desktop\FH\SwKom\DMS_RABBIT\SWKOM_Proj.Test\obj\Debug\net8.0\SWKOM_Proj.Test.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ivank\OneDrive\Desktop\FH\SwKom\DMS_RABBIT\SWKOM_Proj.Test\obj\Debug\net8.0\SWKOM_Proj.Test.AssemblyInfoInputs.cache
+C:\Users\ivank\OneDrive\Desktop\FH\SwKom\DMS_RABBIT\SWKOM_Proj.Test\obj\Debug\net8.0\SWKOM_Proj.Test.AssemblyInfo.cs
+C:\Users\ivank\OneDrive\Desktop\FH\SwKom\DMS_RABBIT\SWKOM_Proj.Test\obj\Debug\net8.0\SWKOM_Proj.Test.csproj.CoreCompileInputs.cache

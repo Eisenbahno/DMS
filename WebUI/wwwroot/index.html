@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Documents</h1>
+
+    <!-- Error Div-->
+    <div id="errorMessages" style="color: red;"></div>
+
+    <!-- Form to add a new Document -->
+    <div>
+        <h3>Search Document</h3>
+        <input type="text" id="searchDocument" placeholder="Document name">
+        <button onclick="search()">Search</button>
+    </div>
+
+    <!-- Document list -->
+    <div>
+        <h3>Add Document</h3>
+        <input type="text" id="documentName" placeholder="Document name">
+        <button onclick="addDocument()">Add Document</button>
+        <ul id="documentList"></ul>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+name: dockercompose11839480072910547107
+services:
+  asp_rest_api:
+    build:
+      context: C:\Users\ivank\OneDrive\Desktop\FH\SwKom\DMS_RABBIT
+      dockerfile: ./ASP_Rest_API/Dockerfile
+    depends_on:
+      dal:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+    image: asp_rest_api_image
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "8080"
+        protocol: tcp
+  dal:
+    build:
+      context: C:\Users\ivank\OneDrive\Desktop\FH\SwKom\DMS_RABBIT
+      dockerfile: ./DAL/Dockerfile
+    depends_on:
+      db:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8081
+    image: dal_image
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8081
+        published: "8081"
+        protocol: tcp
+  db:
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    image: postgres
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 5432
+        published: "5432"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: postgres_data
+        target: /var/lib/postgresql/data
+        volume: {}
+  webui:
+    build:
+      context: C:\Users\ivank\OneDrive\Desktop\FH\SwKom\DMS_RABBIT\WebUI
+      dockerfile: Dockerfile
+    depends_on:
+      asp_rest_api:
+        condition: service_started
+        required: true
+    image: web_ui_image
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 80
+        published: "80"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\ivank\OneDrive\Desktop\FH\SwKom\DMS_RABBIT\WebUI\nginx.conf
+        target: /etc/nginx/nginx.conf
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\ivank\OneDrive\Desktop\FH\SwKom\DMS_RABBIT\WebUI\wwwroot
+        target: /app/wwwroot
+        bind:
+          create_host_path: true
+networks:
+  default:
+    name: dockercompose11839480072910547107_default
+volumes:
+  postgres_data:
+    name: dockercompose11839480072910547107_postgres_data

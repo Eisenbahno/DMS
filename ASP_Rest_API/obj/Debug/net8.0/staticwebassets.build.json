@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "YMwcoZUj5ldAuPjYLoT6ZzLzdxvm+ABVjINpiIiLKwg=",
+  "Source": "ASP_Rest_API",
+  "BasePath": "_content/ASP_Rest_API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\ivank\\OneDrive\\Desktop\\FH\\SwKom\\DMS_RABBIT\\DAL\\DAL.csproj",
+      "Version": 2,
+      "Source": "DAL",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
