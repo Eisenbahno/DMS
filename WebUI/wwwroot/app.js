@@ -15,6 +15,13 @@ function fetchDocuments() {
                             <span>Document: ${mydocument.name} | Id: ${mydocument.id}</span>
                             <button class="delete" style="margin-left: 10px;" onclick="deleteDocument(${mydocument.id})">Delete</button>
                             </button>
+                            <br/>
+                            <span>File: ${mydocument.name || "No file uploaded"}</span>
+                            <input type="file" id="fileInput${mydocument.id}" />
+                            <button style="margin-left: 10px;" onclick="addDocumentQueue(${mydocument.id}, document.getElementById('fileInput${mydocument.id}'))">
+                                Upload File
+                            </button>
+                            <br/>
                         `;
                 documentList.appendChild(li);
             });
@@ -52,6 +59,33 @@ function addDocument() {
             }
         })
         .catch(error => console.error('Fehler:', error));
+}
+
+function addDocumentQueue(taskId, fileInput) {
+    const file = fileInput.files[0];
+    if (!file) {
+        alert("Keine Datei ausgewählt.");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('document', file);
+
+    fetch(`${apiUrl}/${taskId}/upload`, {
+        method: 'PUT',
+        body: formData
+    })
+        .then(response => {
+            if (response.ok) {
+                fetchDocuments();
+                alert("Datei erfolgreich hochgeladen.");
+            } else {
+                alert("Fehler beim Hochladen der Datei.");
+            }
+        })
+        .catch(error => {
+            console.error('Fehler:', error);
+        });
 }
 
 

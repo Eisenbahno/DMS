@@ -6,20 +6,31 @@ using System.Threading.Tasks;
 using ASP_Rest_API.DTO;
 using AutoMapper;
 using DAL.Entities;
+using RabbitMQ.Client;
+using System.Text;
 
 namespace ASP_Rest_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class DocumentController : ControllerBase
+    public class DocumentController : ControllerBase, IDisposable
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IMapper _mapper;
+        private readonly IConnection _connection;
+        private readonly IModel _channel;
 
         public DocumentController(IHttpClientFactory httpClientFactory, IMapper mapper)
         {
             _httpClientFactory = httpClientFactory;
             _mapper = mapper;
+
+            // Stelle die Verbindung zu RabbitMQ her
+            var factory = new ConnectionFactory() { HostName = "rabbitmq", UserName = "user", Password = "password" };
+            _connection = factory.CreateConnection();
+            _channel = _connection.CreateModel();
+            // Deklariere die Queue
+            _channel.QueueDeclare(queue: "file_queue", durable: false, exclusive: false, autoDelete: false, arguments: null);
         }
 
         [HttpGet]
@@ -31,7 +42,8 @@ namespace ASP_Rest_API.Controllers
             if (response.IsSuccessStatusCode)
             {
                 var items = await response.Content.ReadFromJsonAsync<IEnumerable<DocumentItem>>();
-                var dtoItems = _mapper.Map<IEnumerable<DocumentItemDto>>(items);
+                var sortedItems = items.OrderBy(item => item.Id);
+                var dtoItems = _mapper.Map<IEnumerable<DocumentItemDto>>(sortedItems);
                 return Ok(dtoItems);
             }
 
@@ -75,7 +87,7 @@ namespace ASP_Rest_API.Controllers
                 return CreatedAtAction(nameof(GetById), new { id = item.Id }, itemDto);
             }
 
-            return StatusCode((int)response.StatusCode, "Error creating Todo item in DAL");
+            return StatusCode((int)response.StatusCode, "Error creating Documnt in DAL");
         }
 
         [HttpPut("{id}")]
@@ -100,7 +112,61 @@ namespace ASP_Rest_API.Controllers
                 return NoContent();
             }
 
-            return StatusCode((int)response.StatusCode, "Error updating Todo item in DAL");
+            return StatusCode((int)response.StatusCode, "Error updating Document in DAL");
+        }
+
+        [HttpPut("{id}/upload")]
+        public async Task<IActionResult> UploadFile(int id, IFormFile? document)
+        {
+            if (document == null || document.Length == 0)
+            {
+                return BadRequest("Keine Datei hochgeladen.");
+            }
+            // Hole den Task vom DAL
+            var client = _httpClientFactory.CreateClient("DAL");
+            var response = await client.GetAsync($"/api/document/{id}");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return NotFound($"Fehler beim Abrufen des Documents mit ID {id}");
+            }
+            // Mappe das empfangene TodoItem auf ein TodoItemDto
+            var todoItem = await response.Content.ReadFromJsonAsync<DocumentItemDto>();
+            if (todoItem == null)
+            {
+                return NotFound($"Task mit ID {id} nicht gefunden.");
+            }
+            var todoItemDto = _mapper.Map<DocumentItem>(todoItem);
+            // Setze den Dateinamen im DTO
+            todoItemDto.Name = document.FileName;
+            // Aktualisiere das Item im DAL, nutze das DTO
+            var updateResponse = await client.PutAsJsonAsync($"/api/document/{id}", todoItemDto);
+            if (!updateResponse.IsSuccessStatusCode)
+            {
+                return StatusCode((int)updateResponse.StatusCode, $"Fehler beim Speichern des Dateinamens {id}");
+            }
+            // Nachricht an RabbitMQ
+            try
+            {
+                SendToMessageQueue(document.FileName);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Fehler beim Senden der Nachricht an RabbitMQ: {ex.Message}");
+            }
+            return Ok(new { message = $"Dateiname {document.FileName} für Task {id} erfolgreich gespeichert." });
+        }
+        private void SendToMessageQueue(string fileName)
+        {
+            // Sende die Nachricht in den RabbitMQ channel/queue
+            var body = Encoding.UTF8.GetBytes(fileName);
+            _channel.BasicPublish(exchange: "", routingKey: "file_queue", basicProperties: null, body: body);
+            Console.WriteLine($@"[x] Sent {fileName}");
+        }
+        public void Dispose()
+        {
+            _channel?.Close();
+            _connection?.Close();
         }
 
         [HttpDelete("{id}")]
