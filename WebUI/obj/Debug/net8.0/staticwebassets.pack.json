@@ -1,15 +1,15 @@
 {
   "Files": [
     {
-      "Id": "/Users/stefan/Documents/GitHub/DMS/WebUI/wwwroot/app.js",
+      "Id": "/Users/stefan/Desktop/DMS/WebUI/wwwroot/app.js",
       "PackagePath": "staticwebassets/app.js"
     },
     {
-      "Id": "/Users/stefan/Documents/GitHub/DMS/WebUI/wwwroot/index.html",
+      "Id": "/Users/stefan/Desktop/DMS/WebUI/wwwroot/index.html",
       "PackagePath": "staticwebassets/index.html"
     },
     {
-      "Id": "/Users/stefan/Documents/GitHub/DMS/WebUI/wwwroot/styles.css",
+      "Id": "/Users/stefan/Desktop/DMS/WebUI/wwwroot/styles.css",
       "PackagePath": "staticwebassets/styles.css"
     },
     {

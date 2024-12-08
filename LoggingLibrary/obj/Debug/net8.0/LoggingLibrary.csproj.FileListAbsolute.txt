@@ -1,6 +1,0 @@
-/Users/stefan/Desktop/DMS/LoggingLibrary/obj/Debug/net8.0/LoggingLibrary.csproj.AssemblyReference.cache
-/Users/stefan/Desktop/DMS/LoggingLibrary/obj/Debug/net8.0/LoggingLibrary.GeneratedMSBuildEditorConfig.editorconfig
-/Users/stefan/Desktop/DMS/LoggingLibrary/obj/Debug/net8.0/LoggingLibrary.AssemblyInfoInputs.cache
-/Users/stefan/Desktop/DMS/LoggingLibrary/obj/Debug/net8.0/LoggingLibrary.AssemblyInfo.cs
-/Users/stefan/Desktop/DMS/LoggingLibrary/obj/Debug/net8.0/LoggingLibrary.csproj.CoreCompileInputs.cache
-/Users/stefan/Desktop/DMS/LoggingLibrary/obj/Debug/net8.0/LoggingLibrary.sourcelink.json

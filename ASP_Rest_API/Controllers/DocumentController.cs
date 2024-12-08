@@ -26,7 +26,7 @@ namespace ASP_Rest_API.Controllers
             _mapper = mapper;
 
             // Stelle die Verbindung zu RabbitMQ her
-            var factory = new ConnectionFactory() { HostName = "rabbitmq", UserName = "user", Password = "password" };
+            var factory = new ConnectionFactory() { HostName = "rabbitmq_dms", UserName = "user", Password = "password" };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
             // Deklariere die Queue
@@ -122,6 +122,16 @@ namespace ASP_Rest_API.Controllers
             {
                 return BadRequest("Keine Datei hochgeladen.");
             }
+
+            // Speichere die Datei
+            var filePath = Path.Combine("uploads", document.FileName);
+            Directory.CreateDirectory("uploads"); // Sicherstellen, dass der Ordner existiert
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await document.CopyToAsync(stream);
+            }
+
             // Hole den Task vom DAL
             var client = _httpClientFactory.CreateClient("DAL");
             var response = await client.GetAsync($"/api/document/{id}");
@@ -130,39 +140,96 @@ namespace ASP_Rest_API.Controllers
             {
                 return NotFound($"Fehler beim Abrufen des Documents mit ID {id}");
             }
-            // Mappe das empfangene TodoItem auf ein TodoItemDto
+
             var todoItem = await response.Content.ReadFromJsonAsync<DocumentItemDto>();
             if (todoItem == null)
             {
                 return NotFound($"Task mit ID {id} nicht gefunden.");
             }
+
             var todoItemDto = _mapper.Map<DocumentItem>(todoItem);
-            // Setze den Dateinamen im DTO
             todoItemDto.Name = document.FileName;
-            // Aktualisiere das Item im DAL, nutze das DTO
+
+            // Aktualisiere den Task im DAL
             var updateResponse = await client.PutAsJsonAsync($"/api/document/{id}", todoItemDto);
             if (!updateResponse.IsSuccessStatusCode)
             {
                 return StatusCode((int)updateResponse.StatusCode, $"Fehler beim Speichern des Dateinamens {id}");
             }
-            // Nachricht an RabbitMQ
+
+            // Nachricht an RabbitMQ senden
             try
             {
-                SendToMessageQueue(document.FileName);
+                SendToMessageQueue(id, filePath); // Nachricht mit ID und Pfad senden
             }
             catch (Exception ex)
             {
                 return StatusCode(500, $"Fehler beim Senden der Nachricht an RabbitMQ: {ex.Message}");
             }
+
             return Ok(new { message = $"Dateiname {document.FileName} für Task {id} erfolgreich gespeichert." });
         }
-        private void SendToMessageQueue(string fileName)
+        
+        private void SendToMessageQueue(int id, string filePath)
         {
-            // Sende die Nachricht in den RabbitMQ channel/queue
-            var body = Encoding.UTF8.GetBytes(fileName);
+            // Nachricht im richtigen Format erstellen
+            var message = $"{id}|{filePath}"; // Beispiel: "1|/app/uploads/example.pdf"
+
+            // Nachricht in Bytes umwandeln
+            var body = Encoding.UTF8.GetBytes(message);
+
+            // Nachricht an RabbitMQ senden
             _channel.BasicPublish(exchange: "", routingKey: "file_queue", basicProperties: null, body: body);
-            Console.WriteLine($@"[x] Sent {fileName}");
+            Console.WriteLine($@"[x] Sent: {message}");
         }
+
+        [HttpPost("consume-ocr-results")]
+        public IActionResult ConsumeAndSaveResults()
+        {
+            var factory = new ConnectionFactory()
+            {
+                HostName = "rabbitmq_dms",
+                UserName = "user",
+                Password = "password"
+            };
+
+            using var connection = factory.CreateConnection();
+            using var channel = connection.CreateModel();
+
+            // Stelle sicher, dass die Queue existiert
+            channel.QueueDeclare(queue: "ocr_result_queue", durable: false, exclusive: false, autoDelete: false, arguments: null);
+
+            var result = channel.BasicGet(queue: "ocr_result_queue", autoAck: true);
+
+            if (result == null)
+            {
+                return NotFound("Keine OCR-Ergebnisse in der Warteschlange gefunden.");
+            }
+
+            // Nachricht parsen
+            var message = Encoding.UTF8.GetString(result.Body.ToArray());
+            var parts = message.Split('|');
+
+            if (parts.Length != 2)
+            {
+                return BadRequest("Ungültiges Nachrichtenformat in der Warteschlange.");
+            }
+
+            var id = parts[0];
+            var extractedText = parts[1];
+
+            // TXT-Datei speichern
+            var outputPath = Path.Combine("ocr_results", $"{id}.txt");
+            Directory.CreateDirectory("ocr_results"); // Sicherstellen, dass der Ordner existiert
+
+            System.IO.File.WriteAllText(outputPath, extractedText);
+
+            Console.WriteLine($"[x] Ergebnis für ID {id} als {outputPath} gespeichert.");
+
+            return Ok(new { message = $"OCR-Ergebnis gespeichert unter {outputPath}", id });
+        }
+
+        
         public void Dispose()
         {
             _channel?.Close();

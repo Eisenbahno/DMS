@@ -56,25 +56,26 @@ public class MockDocumentItemRepository
     {
         // Arrange: Mock repository to handle adding an item
         var newItem = new DocumentItem { Id = 3, Name = "New Document" };
-        _mockRepository.Setup(repo => repo.AddAsync(It.IsAny<DocumentItem>())).ReturnsAsync(true);
+        _mockRepository.Setup(repo => repo.AddAsync(It.IsAny<DocumentItem>())).Returns(Task.CompletedTask);
 
         // Act: Add the new item asynchronously
-        void result = await _mockRepository.Object.AddAsync(newItem);
+        await _mockRepository.Object.AddAsync(newItem);
 
         // Assert: Verify that the item was added
-        Assert.True(result);
+        _mockRepository.Verify(repo => repo.AddAsync(newItem), Times.Once);
     }
 
     [Fact]
     public void DeleteItem_RemovesItemSuccessfully()
     {
+        var newItem = new DocumentItem { Id = 3, Name = "New Document" };
         // Arrange: Mock repository to handle deleting an item
-        _mockRepository.Setup(repo => repo.DeleteAsync(1)).Returns(true);
+        _mockRepository.Setup(repo => repo.DeleteAsync(It.IsAny<int>())).Returns(Task.CompletedTask);
 
         // Act: Delete the item
-        var result = _mockRepository.Object.DeleteAsync(1);
+        _mockRepository.Object.DeleteAsync(3);
 
         // Assert: Verify that the item was deleted
-        Assert.True(result);
+        _mockRepository.Verify(repo => repo.DeleteAsync(newItem.Id), Times.Once);
     }
 }

@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "YMwcoZUj5ldAuPjYLoT6ZzLzdxvm+ABVjINpiIiLKwg=",
+  "Hash": "OoN+0+gfElGx/pX2JXwDcrYE+1de3LMABV3mktnkQ6Y=",
   "Source": "ASP_Rest_API",
   "BasePath": "_content/ASP_Rest_API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Users\\ivank\\OneDrive\\Desktop\\FH\\SwKom\\DMS_RABBIT\\DAL\\DAL.csproj",
+      "Identity": "/Users/stefan/Desktop/DMS/DAL/DAL.csproj",
       "Version": 2,
       "Source": "DAL",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",

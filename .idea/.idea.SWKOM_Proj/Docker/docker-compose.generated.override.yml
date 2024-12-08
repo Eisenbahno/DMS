@@ -1,0 +1,20 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  ocr_worker:
+    build:
+      context: "/Users/stefan/Desktop/DMS/Ocr_Worker"
+      dockerfile: "Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/Ocr_Worker.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "ocr_worker_image:dev"
+    ports: []
+    volumes:
+    - "/Users/stefan/.nuget/packages:/root/.nuget/packages"
+    - "/Users/stefan/Desktop/DMS/Ocr_Worker:/app:rw"
+    - "/Users/stefan/Desktop/DMS:/src:rw"
+    working_dir: "/app"

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7TpxxxFajCAj3/ScpFhufHxeP/hrzTh23jayMwUMZKY=",
+  "Hash": "05AsuhZmRusgvf1uX2bNUWFv2083ucppQE0IP1g3uoU=",
   "Source": "WebUI",
   "BasePath": "_content/WebUI",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "WebUI/wwwroot",
       "Source": "WebUI",
-      "ContentRoot": "/Users/stefan/Documents/GitHub/DMS/WebUI/wwwroot/",
+      "ContentRoot": "/Users/stefan/Desktop/DMS/WebUI/wwwroot/",
       "BasePath": "_content/WebUI",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "/Users/stefan/Documents/GitHub/DMS/WebUI/wwwroot/app.js",
+      "Identity": "/Users/stefan/Desktop/DMS/WebUI/wwwroot/app.js",
       "SourceId": "WebUI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/stefan/Documents/GitHub/DMS/WebUI/wwwroot/",
+      "ContentRoot": "/Users/stefan/Desktop/DMS/WebUI/wwwroot/",
       "BasePath": "_content/WebUI",
       "RelativePath": "app.js",
       "AssetKind": "All",
@@ -36,10 +36,10 @@
       "OriginalItemSpec": "wwwroot/app.js"
     },
     {
-      "Identity": "/Users/stefan/Documents/GitHub/DMS/WebUI/wwwroot/index.html",
+      "Identity": "/Users/stefan/Desktop/DMS/WebUI/wwwroot/index.html",
       "SourceId": "WebUI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/stefan/Documents/GitHub/DMS/WebUI/wwwroot/",
+      "ContentRoot": "/Users/stefan/Desktop/DMS/WebUI/wwwroot/",
       "BasePath": "_content/WebUI",
       "RelativePath": "index.html",
       "AssetKind": "All",
@@ -55,10 +55,10 @@
       "OriginalItemSpec": "wwwroot/index.html"
     },
     {
-      "Identity": "/Users/stefan/Documents/GitHub/DMS/WebUI/wwwroot/styles.css",
+      "Identity": "/Users/stefan/Desktop/DMS/WebUI/wwwroot/styles.css",
       "SourceId": "WebUI",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/stefan/Documents/GitHub/DMS/WebUI/wwwroot/",
+      "ContentRoot": "/Users/stefan/Desktop/DMS/WebUI/wwwroot/",
       "BasePath": "_content/WebUI",
       "RelativePath": "styles.css",
       "AssetKind": "All",

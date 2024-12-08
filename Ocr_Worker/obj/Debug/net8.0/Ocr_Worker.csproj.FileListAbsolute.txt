@@ -1,0 +1,15 @@
+/Users/stefan/Desktop/DMS/Ocr_Worker/bin/Debug/net8.0/Ocr_Worker
+/Users/stefan/Desktop/DMS/Ocr_Worker/bin/Debug/net8.0/Ocr_Worker.deps.json
+/Users/stefan/Desktop/DMS/Ocr_Worker/bin/Debug/net8.0/Ocr_Worker.runtimeconfig.json
+/Users/stefan/Desktop/DMS/Ocr_Worker/bin/Debug/net8.0/Ocr_Worker.dll
+/Users/stefan/Desktop/DMS/Ocr_Worker/bin/Debug/net8.0/Ocr_Worker.pdb
+/Users/stefan/Desktop/DMS/Ocr_Worker/obj/Debug/net8.0/Ocr_Worker.GeneratedMSBuildEditorConfig.editorconfig
+/Users/stefan/Desktop/DMS/Ocr_Worker/obj/Debug/net8.0/Ocr_Worker.AssemblyInfoInputs.cache
+/Users/stefan/Desktop/DMS/Ocr_Worker/obj/Debug/net8.0/Ocr_Worker.AssemblyInfo.cs
+/Users/stefan/Desktop/DMS/Ocr_Worker/obj/Debug/net8.0/Ocr_Worker.csproj.CoreCompileInputs.cache
+/Users/stefan/Desktop/DMS/Ocr_Worker/obj/Debug/net8.0/Ocr_Worker.sourcelink.json
+/Users/stefan/Desktop/DMS/Ocr_Worker/obj/Debug/net8.0/Ocr_Worker.dll
+/Users/stefan/Desktop/DMS/Ocr_Worker/obj/Debug/net8.0/refint/Ocr_Worker.dll
+/Users/stefan/Desktop/DMS/Ocr_Worker/obj/Debug/net8.0/Ocr_Worker.pdb
+/Users/stefan/Desktop/DMS/Ocr_Worker/obj/Debug/net8.0/Ocr_Worker.genruntimeconfig.cache
+/Users/stefan/Desktop/DMS/Ocr_Worker/obj/Debug/net8.0/ref/Ocr_Worker.dll

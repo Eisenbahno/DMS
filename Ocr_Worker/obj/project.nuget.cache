@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "VQbGWQWvx+Q=",
+  "success": true,
+  "projectFilePath": "/Users/stefan/Desktop/DMS/Ocr_Worker/Ocr_Worker.csproj",
+  "expectedPackageFiles": [
+    "/Users/stefan/.nuget/packages/magick.net-q8-anycpu/14.2.0/magick.net-q8-anycpu.14.2.0.nupkg.sha512",
+    "/Users/stefan/.nuget/packages/magick.net.core/14.2.0/magick.net.core.14.2.0.nupkg.sha512",
+    "/Users/stefan/.nuget/packages/rabbitmq.client/6.8.1/rabbitmq.client.6.8.1.nupkg.sha512",
+    "/Users/stefan/.nuget/packages/system.memory/4.5.5/system.memory.4.5.5.nupkg.sha512",
+    "/Users/stefan/.nuget/packages/system.reflection.emit/4.7.0/system.reflection.emit.4.7.0.nupkg.sha512",
+    "/Users/stefan/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512",
+    "/Users/stefan/.nuget/packages/tesseract/5.2.0/tesseract.5.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}
