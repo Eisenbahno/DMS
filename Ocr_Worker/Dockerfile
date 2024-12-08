@@ -1,7 +1,7 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 
-# Install required libraries
+# Install required libraries for OCR processing
 RUN apt-get update && apt-get install -y \
     tesseract-ocr \
     libleptonica-dev \
@@ -23,4 +23,5 @@ FROM base AS final
 WORKDIR /app
 COPY --from=build /app .
 
+# Use the shared entry point for the application
 ENTRYPOINT ["dotnet", "Ocr_Worker.dll"]

@@ -141,3 +141,5 @@ C:/Users/ivank/OneDrive/Desktop/FH/SwKom/DMS_RABBIT/SWKOM_Proj.Test/obj/Debug/ne
 /Users/stefan/Desktop/DMS/SWKOM_Proj.Test/obj/Debug/net8.0/SWKOM_Proj.Test.pdb
 /Users/stefan/Desktop/DMS/SWKOM_Proj.Test/obj/Debug/net8.0/SWKOM_Proj.Test.genruntimeconfig.cache
 /Users/stefan/Desktop/DMS/SWKOM_Proj.Test/obj/Debug/net8.0/ref/SWKOM_Proj.Test.dll
+/Users/stefan/Desktop/DMS/SWKOM_Proj.Test/bin/Debug/net8.0/Elasticsearch.Net.dll
+/Users/stefan/Desktop/DMS/SWKOM_Proj.Test/bin/Debug/net8.0/Nest.dll

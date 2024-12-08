@@ -5,8 +5,8 @@ services:
       context: .
       dockerfile: ./ASP_Rest_API/Dockerfile
     ports:
-     - "8080:8080"
-     #- "443:443"
+      - "8080:8080"
+      #- "443:443"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080 # Stellt sicher, dass nur HTTP verwendet wird
@@ -19,13 +19,13 @@ services:
       context: ./WebUI
       dockerfile: Dockerfile
     ports:
-     - "80:80"
+      - "80:80"
     volumes:
       - ./WebUI/nginx.conf:/etc/nginx/nginx.conf  # Binde die Nginx-Konfigurationsdatei ein
       - ./WebUI/wwwroot:/app/wwwroot  # Statische Dateien mounten
     depends_on:
       - asp_rest_api
-   
+  
   db:
     image: postgres
     environment:
@@ -75,6 +75,26 @@ services:
     volumes:
       - ./uploads:/app/uploads
 
- 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.9.0
+    container_name: elasticsearch
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+    ports:
+      - "9200:9200"
+
+
+  indexing_worker:
+    build:
+      context: ./Ocr_Worker # Path to the Indexing Worker project
+      dockerfile: Dockerfile
+    depends_on:
+      - rabbitmq_dms
+      - elasticsearch
+    environment:
+      RABBITMQ_HOST: rabbitmq_dms
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+
 volumes:
-    postgres_data:  # Definiertes Volume für persistente Datenspeicherung von PostgreSQL
+  postgres_data:  # Definiertes Volume für persistente Datenspeicherung von PostgreSQL
