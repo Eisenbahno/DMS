@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SWKOM_Proj.Test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+46d8a26ae20a1b876a88758a45c91772f1f360d3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ef201ead0315d7977e5d8e23d671e5327510d21b")]
 [assembly: System.Reflection.AssemblyProductAttribute("SWKOM_Proj.Test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SWKOM_Proj.Test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
