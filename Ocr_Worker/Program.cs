@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿using Elasticsearch.Net;
+using Nest;
 using RabbitMQ.Client;
 
 namespace Ocr_Worker;
@@ -32,7 +33,11 @@ class Program
 
         // Setup Elasticsearch client
         var settings = new ConnectionSettings(new Uri("http://localhost:9200"))
-            .DefaultIndex("ocr_results");
+            .DefaultIndex("ocr_results")
+            .DisableDirectStreaming()
+            .ServerCertificateValidationCallback(CertificateValidations.AllowAll)
+            .CertificateFingerprint("FINGERPRINT_OF_YOUR_CERTIFICATE");
+        
         var elasticClient = new ElasticClient(settings);
 
         // Start OCR Worker
@@ -51,6 +56,9 @@ class Program
             indexingWorker.Start(); // Indexing logic that consumes from RabbitMQ
         });
         indexingThread.Start();
+
+        ElasticSearchClient client = new ElasticSearchClient("http://localhost:9200/");
+        client.SearchDocumentsAsync("http://localhost:9200/ocr_results/_doc/6");
 
         Console.WriteLine("Workers are running. Press Ctrl+C to exit.");
 
